@@ -16,7 +16,11 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+        $technologies = Technology::all();
+
+        return view('admin.technologies.index', compact('technologies'));
+
+
     }
 
     /**
@@ -24,7 +28,8 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.technologies.create');
+
     }
 
     /**
@@ -32,31 +37,53 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validationResultTechnology = $request->validate([
+            'title' => 'required|max:64',
+            'slug' => 'nullable|max:1000',
+        ]);
+
+        $technology = Technology::create($validationResultTechnology);
+        // dd($validationResult);
+
+        return redirect()->route('admin.technologies.show', ['technology' => $technology->slug]);
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Technology $technology)
+    public function show(string $slug)
     {
-        //
+        $technology = Technology::where('slug', $slug)->firstOrFail();
+        return view('admin.technologies.show', compact('technology'));
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Technology $technology)
+    public function edit(string $slug)
     {
-        //
+        $technology = Technology::where('slug', $slug)->firstOrFail();
+        return view('admin.technologies.edit', compact('technology'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Technology $technology)
+    public function update(Request $request, string $slug)
     {
-        //
+        $technology = Technology::where('slug', $slug)->firstOrFail();
+        $validationResultTechnology = $request->validate([
+            'title' => 'required|max:64',
+            'slug' => 'nullable|max:1000',
+        ]);
+
+        $technology->update($validationResultTechnology);
+
+        return redirect()->route('admin.technologies.index');
+
     }
 
     /**
@@ -64,6 +91,9 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology->delete();
+
+        return redirect()->route('admin.technologies.index');
+
     }
 }
