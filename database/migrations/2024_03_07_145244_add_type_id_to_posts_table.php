@@ -28,6 +28,7 @@ return new class extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->dropForeign(['type_id']);
             $table->dropColumn('type_id');
+            //noi per eliminare la colonna dobbiamo prima droppare la foreign key
         });
     }
 };

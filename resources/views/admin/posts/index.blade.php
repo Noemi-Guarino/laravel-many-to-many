@@ -23,6 +23,7 @@
                                     <th scope="col">Title</th>
                                     <th scope="col">Slug</th>
                                     <th scope="col">Types</th>
+                                    <th scope="col">technology</th>
                                     <th scope="col">Created at</th>
                                     <th scope="col">Actions</th>
                                 </tr>
