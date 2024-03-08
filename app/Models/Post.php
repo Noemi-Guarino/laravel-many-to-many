@@ -21,5 +21,10 @@ class Post extends Model
         //You Belong to me la la laaaa
     }
 
+    public function technologies(){
+        return $this->belongsToMany(Technology::class);
+        //relazione many to many con technology
+    }
+
 
 }
