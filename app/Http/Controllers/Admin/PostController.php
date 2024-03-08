@@ -41,7 +41,7 @@ class PostController extends Controller
     public function create()
     {
         $types = Type::all();
-        $technolog = Technology::all();
+        $technologies = Technology::all();
         return view('admin.posts.create',compact('types','technologies'));
     }
 

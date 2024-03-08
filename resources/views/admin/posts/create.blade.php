@@ -77,10 +77,10 @@
                                 {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}
                                 class="form-check-input"
                                 type="checkbox"
-                                id="tag-{{ $technology->id }}"
-                                name="tags[]"
+                                id="technology-{{ $technology->id }}"
+                                name="technologies[]"
                                 value="{{ $technology->id }}">
-                            <label class="form-check-label" for="tag-{{ $technology->id }}">{{ $technology ->title }}</label>
+                            <label class="form-check-label" for="technology-{{ $technology->id }}">{{ $technology ->title }}</label>
                         </div>
                     @endforeach
                 </div>
