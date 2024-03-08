@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 // models
 use App\Models\Post;
 use App\Models\Type;
+use App\Models\Technology;
+
 
 
 
@@ -39,7 +41,8 @@ class PostController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.posts.create',compact('types'));
+        $technologies = Technology::all();
+        return view('admin.posts.create',compact('types','technologies'));
     }
 
     /**
@@ -51,7 +54,8 @@ class PostController extends Controller
             'title' => 'required|max:64',
             'slug' => 'nullable|max:1000',
             'content' => 'nullable|max:1000',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|array|exists:technologies,id'
         ]);
 
         $post = Post::create($validationResult);
@@ -67,8 +71,9 @@ class PostController extends Controller
     public function edit(string $slug)
     {
         $types = Type::all();
+        $technologies = Technology::all();
         $post = Post::where('slug', $slug)->firstOrFail();
-        return view('admin.posts.edit',compact('post','types'));
+        return view('admin.posts.edit',compact('post','types','technologies'));
     }
 
     /**
@@ -81,7 +86,9 @@ class PostController extends Controller
             'title' => 'required|max:64',
             'slug' => 'nullable|max:1000',
             'content' => 'nullable|max:1000',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|array|exists:technologies,id'
+
         ]);
 
         $post->update($validationResult);
