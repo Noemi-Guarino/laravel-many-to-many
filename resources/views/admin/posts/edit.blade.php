@@ -64,6 +64,23 @@
                     </select>
                 </div>
 
+                <div class="mb-3">
+                    <label for="technology_id" class="form-label">Tipologia</label>
+                    <select name="technology_id" id="technology_id" class="form-select">
+                        <option
+                            value="{{ old('technology_id') }}">
+                            Seleziona una tipologia...
+                        </option>
+                        @foreach ( $technologies as $technology )
+                            <option
+                            value="{{ $technology->id }}"
+                            {{ old('technology_id') }}>
+                            {{ $technology->title }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
 
                 <div>
                     <button type="submit" class="btn btn-success w-100">

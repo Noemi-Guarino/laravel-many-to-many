@@ -44,7 +44,7 @@
                                         </td>
                                         <td>
                                             @if ($post->technology != null)
-                                            <a href="{{ route('admin.technology.show', ['technology' => $post->technology->id]) }}">
+                                            <a href="{{ route('admin.technologies.show', ['technology' => $post->technology->id]) }}">
                                                 {{ $post->technology->title }}
                                             </a>
                                             @else
