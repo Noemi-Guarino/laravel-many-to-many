@@ -61,6 +61,17 @@ class PostController extends Controller
         $post = Post::create($validationResult);
         // dd($validationResult);
 
+        // if (isset($postData['technologies'])) {
+        //     foreach ($postData['technologies'] as $singletechnologyId) {
+        //         /*
+        //             post_id     |   tag_id
+        //             ----------------------
+        //             $post->id   |  $singleTagId
+        //         */
+        //         $post->technologies()->attach($singletechnologyId);
+        //     }
+        // }
+
         return redirect()->route('admin.posts.show', ['post' => $post->slug]);
     }
 
