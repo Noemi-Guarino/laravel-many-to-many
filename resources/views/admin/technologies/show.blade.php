@@ -14,6 +14,14 @@
                 <h2>
                     Slug: {{ $technology->title }}
                 </h2>
+            
+                <li>
+                    @foreach ($technology->posts as $post)
+                        <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}" class="badge rounded-pill text-bg-primary p-1">
+                            {{ $post->title }}
+                        </a>
+                    @endforeach
+                </li>
             </div>
         </div>
     </div>

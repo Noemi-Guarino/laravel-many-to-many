@@ -35,9 +35,9 @@
                                         <td>{{ $post->title }}</td>
                                         <td>{{ $post->slug }}</td>
                                         <td>  @if ($post->type != null)
-                                            {{-- <a href="{{ route('admin.types.show', ['type' => $post->type->id]) }}"> --}}
+                                            <a href="{{ route('admin.types.show', ['type' => $post->type->id]) }}">
                                                 {{ $post->type->title }}
-                                            {{-- </a> --}}
+                                            </a> 
                                             @else
                                                 -
                                             @endif
@@ -45,15 +45,14 @@
                                         <td>
                                             <div>
                                                 @forelse ($post->technologies as $technology)
-                                                    <a href="{{ route('admin.technologies.show', ['technology' => $technology->id]) }}" class="badge rounded-pill text-bg-primary">
+                                                    <a href="{{ route('admin.technologies.show', ['technology' => $technology->id]) }}" class="badge rounded-pill text-bg-primary p-1">
                                                         {{ $technology->title }}
                                                     </a>
                                                 @empty
                                                     -
                                                 @endforelse
                                             </div>
-                                            </td>  
-                                        </td>
+                                        </td>  
                                         <td>{{ $post->created_at }}</td>
                                         <td>
                                             <a href="{{ route('admin.posts.show', ['post' => $post->slug]) }}" class="btn btn-xs btn-primary">

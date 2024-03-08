@@ -65,11 +65,11 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="technology_id" class="form-label">Tipologia</label>
+                    {{-- <label for="technology_id" class="form-label">Tecnologia</label>
                     <select name="technology_id" id="technology_id" class="form-select">
                         <option
                             value="{{ old('technology_id') }}">
-                            Seleziona una tipologia...
+                            Seleziona una tecnologia...
                         </option>
                         @foreach ( $technologies as $technology )
                             <option
@@ -78,7 +78,7 @@
                             {{ $technology->title }}
                             </option>
                         @endforeach
-                    </select>
+                    </select> --}}
                 </div>
 
 
