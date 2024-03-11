@@ -34,7 +34,8 @@
                                         <th scope="row">{{ $post->id }}</th>
                                         <td>{{ $post->title }}</td>
                                         <td>{{ $post->slug }}</td>
-                                        <td>  @if ($post->type != null)
+                                        <td>  
+                                            @if ($post->type != null)
                                             <a href="{{ route('admin.types.show', ['type' => $post->type->id]) }}">
                                                 {{ $post->type->title }}
                                             </a> 

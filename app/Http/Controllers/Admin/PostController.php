@@ -50,6 +50,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validationResult = $request->validate([
             'title' => 'required|max:64',
             'slug' => 'nullable|max:1000',
@@ -59,7 +60,6 @@ class PostController extends Controller
         ]);
 
         $post = Post::create($validationResult);
-        // dd($validationResult);
 
         // if (isset($postData['technologies'])) {
         //     foreach ($postData['technologies'] as $singletechnologyId) {
@@ -99,6 +99,7 @@ class PostController extends Controller
             'content' => 'nullable|max:1000',
             'type_id' => 'nullable|exists:types,id',
             'technologies' => 'nullable|array|exists:technologies,id'
+            //inserisci un array di tecnologie nella tabella post solo se esistono nella tabella technologies gli id che gli passo
 
         ]);
 

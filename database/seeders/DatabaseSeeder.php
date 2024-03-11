@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        //questa funzione 
+        //mi permette di eseguire grazie al comando tutti i seeder
         $this->call([
             TypeSeeder::class,
             PostSeeder::class,
