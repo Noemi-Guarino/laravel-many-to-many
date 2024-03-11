@@ -60,17 +60,15 @@ class PostController extends Controller
         ]);
 
         $post = Post::create($validationResult);
+        // dd($validationResult);
 
-        // if (isset($postData['technologies'])) {
-        //     foreach ($postData['technologies'] as $singletechnologyId) {
-        //         /*
-        //             post_id     |   tag_id
-        //             ----------------------
-        //             $post->id   |  $singleTagId
-        //         */
-        //         $post->technologies()->attach($singletechnologyId);
-        //     }
-        // }
+
+        if (isset($validationResult['technologies'])) {
+            foreach ($validationResult['technologies'] as $singletechnologyId) {
+        
+                $post->technologies()->attach($singletechnologyId);
+            }
+        }
 
         return redirect()->route('admin.posts.show', ['post' => $post->slug]);
     }
@@ -105,6 +103,15 @@ class PostController extends Controller
 
         $post->update($validationResult);
         // dd($validationResult);
+
+        if (isset($validationResult['technologies'])) {
+            $post->technologies()->sync($validationResult['technologies']);
+        }
+        else {
+            $post->technologies()->detach();
+        }
+
+
         return redirect()->route('admin.posts.index');
 
 

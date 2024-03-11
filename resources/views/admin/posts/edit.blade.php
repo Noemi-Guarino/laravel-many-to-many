@@ -65,23 +65,21 @@
                 </div>
 
                 <div class="mb-3">
-                    {{-- <label for="technology_id" class="form-label">Tecnologia</label>
-                    <select name="technology_id" id="technology_id" class="form-select">
-                        <option
-                            value="{{ old('technology_id') }}">
-                            Seleziona una tecnologia...
-                        </option>
-                        @foreach ( $technologies as $technology )
-                            <option
-                            value="{{ $technology->id }}"
-                            {{ old('technology_id') }}>
-                            {{ $technology->title }}
-                            </option>
-                        @endforeach
-                    </select> --}}
+                    @foreach ($technologies as $technology)
+                        <div class="form-check form-check-inline">
+                            <input
+                                {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}
+                                class="form-check-input"
+                                type="checkbox"
+                                id="technology-{{ $technology->id }}"
+                                name="technologies[]"
+                                value="{{ $technology->id }}">
+                            <label class="form-check-label" for="technology-{{ $technology->id }}">{{ $technology ->title }}</label>
+                        </div>
+                    @endforeach
                 </div>
 
-
+                
                 <div>
                     <button type="submit" class="btn btn-success w-100">
                         update
