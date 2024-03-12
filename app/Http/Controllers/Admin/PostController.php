@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 // models
 use App\Models\Post;
@@ -56,8 +58,16 @@ class PostController extends Controller
             'slug' => 'nullable|max:1000',
             'content' => 'nullable|max:1000',
             'type_id' => 'nullable|exists:types,id',
-            'technologies' => 'nullable|array|exists:technologies,id'
+            'technologies' => 'nullable|array|exists:technologies,id',
+            'cover_img'=> 'nullable|image',
         ]);
+        $ImgPath = null;
+
+        if (isset($validationResult['cover_img'])) {
+            $ImgPath = Storage::disk('public')->put('images', $validationResult['cover_img']);
+        }
+        //immagine di defaut nulla e apriamo uan condizione:"se nelle nostra validation c'è l'immagina allora salviamo il percorso:disco publico e put(mettila nella cartella images)"
+
 
         $post = Post::create($validationResult);
         // dd($validationResult);
@@ -96,7 +106,9 @@ class PostController extends Controller
             'slug' => 'nullable|max:1000',
             'content' => 'nullable|max:1000',
             'type_id' => 'nullable|exists:types,id',
-            'technologies' => 'nullable|array|exists:technologies,id'
+            'technologies' => 'nullable|array|exists:technologies,id',
+            'cover_img'=> 'nullable|image',
+
             //inserisci un array di tecnologie nella tabella post solo se esistono nella tabella technologies gli id che gli passo
 
         ]);

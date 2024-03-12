@@ -26,7 +26,8 @@
             </div>
             @endif
             
-            <form action="{{ route('admin.posts.store') }}" method="POST">
+            <form action="{{ route('admin.posts.store') }}" enctype="multipart/form-data"
+            method="POST">
                 @csrf
 
                 <div class="mb-3">
@@ -71,6 +72,10 @@
                     @endforeach
                 </div>
 
+                <div class="mb-3">
+                    <label for="cover_img" class="form-label">Cover image</label>
+                    <input class="form-control" type="file" id="cover_img" name="cover_img">
+                </div>
 
                 <div class="mb-3">
                     <label for="content" class="form-label">content</label>

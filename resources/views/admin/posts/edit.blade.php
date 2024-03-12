@@ -79,6 +79,10 @@
                     @endforeach
                 </div>
 
+                <div class="mb-3">
+                    <label for="cover_img" class="form-label">Cover image</label>
+                    <input class="form-control" type="file" id="cover_img" name="cover_img">
+                </div>
                 
                 <div>
                     <button type="submit" class="btn btn-success w-100">
