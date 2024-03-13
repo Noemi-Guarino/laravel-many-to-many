@@ -14,6 +14,7 @@ class Post extends Model
         'slug',
         'content',
         'type_id',
+        'cover_img'
     ];
 
     public function type(){

@@ -69,6 +69,7 @@ class PostController extends Controller
         //immagine di defaut nulla e apriamo uan condizione:"se nelle nostra validation c'è l'immagina allora salviamo il percorso:disco publico e put(mettila nella cartella images)"
 
 
+        $validationResult['cover_img'] = $ImgPath;
         $post = Post::create($validationResult);
         // dd($validationResult);
 
@@ -108,13 +109,11 @@ class PostController extends Controller
             'type_id' => 'nullable|exists:types,id',
             'technologies' => 'nullable|array|exists:technologies,id',
             'cover_img'=> 'nullable|image',
+            'delete_cover_img' => 'nullable|boolean',
 
             //inserisci un array di tecnologie nella tabella post solo se esistono nella tabella technologies gli id che gli passo
 
         ]);
-
-        $post->update($validationResult);
-        // dd($validationResult);
 
         if (isset($validationResult['technologies'])) {
             $post->technologies()->sync($validationResult['technologies']);
@@ -122,6 +121,26 @@ class PostController extends Controller
         else {
             $post->technologies()->detach();
         }
+
+        $ImgPath = $post->cover_img;
+        if (isset($validationResult['cover_img'])) {
+            if ($post->cover_img != null) {
+                Storage::disk('public')->delete($post->cover_img);
+            }
+
+            $ImgPath = Storage::disk('public')->put('images', $validationResult['cover_img']);
+        }
+        else if (isset($validationResult['delete_cover_img'])) {
+            Storage::disk('public')->delete($post->cover_img);
+
+            $ImgPath = null;
+        }
+
+
+
+        $validationResult['cover_img'] = $ImgPath;
+        $post->update($validationResult);
+        // dd($validationResult);
 
 
         return redirect()->route('admin.posts.index');
@@ -135,6 +154,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if ($post->cover_img != null) {
+            Storage::disk('public')->delete($post->cover_img);
+        }
+
         $post->delete();
 
         return redirect()->route('admin.posts.index');
